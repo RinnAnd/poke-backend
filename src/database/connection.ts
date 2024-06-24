@@ -3,6 +3,8 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { Pokemon } from 'src/pokemon/entities/pokemon.entity';
+import { TradeOffer } from 'src/trading/entities/trade-offer.entity';
+import { TradePokemon } from 'src/trading/entities/trade-pokemon.entity';
 import { UserPokemon } from 'src/user/entities/user-pokemon.entity';
 import { User } from 'src/user/entities/user.entity';
 
@@ -18,7 +20,7 @@ import { User } from 'src/user/entities/user.entity';
       username: process.env.PG_USER,
       password: process.env.PG_PASSWORD,
       database: process.env.PG_DATABASE,
-      entities: [User, Pokemon, UserPokemon],
+      entities: [User, Pokemon, UserPokemon, TradePokemon, TradeOffer],
       synchronize: true,
     }),
   ],

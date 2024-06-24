@@ -1,29 +1,9 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 import { Type } from 'class-transformer';
-
-class Types {
-  type: {
-    name: string;
-  };
-}
-
-class Ability {
-  ability: {
-    name: string;
-  };
-}
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 class Stat {
   base_stat: number;
-  stat: {
-    name: string;
-  };
-}
-
-class Move {
-  move: {
-    name: string;
-  };
+  stat: string;
 }
 
 @Entity('pokemon')
@@ -44,22 +24,16 @@ export class Pokemon {
   @Column('int', { name: 'weight' })
   weight: number;
 
-  @Column('text', { name: 'image' })
-  image: string;
+  @Column('text', { name: 'image', array: true })
+  images: string[];
 
-  @Column('json', { name: 'types' })
-  @Type(() => Types)
-  types: Types[];
+  @Column('text', { name: 'types', array: true })
+  types: string[];
 
-  @Column('json', { name: 'abilities' })
-  @Type(() => Ability)
-  abilities: Ability[];
+  @Column('text', { name: 'abilities', array: true })
+  abilities: string[];
 
   @Column('json', { name: 'stats' })
   @Type(() => Stat)
   stats: Stat[];
-
-  @Column('json', { name: 'moves' })
-  @Type(() => Move)
-  moves: Move[];
 }

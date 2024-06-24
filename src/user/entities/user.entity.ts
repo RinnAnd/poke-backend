@@ -32,12 +32,6 @@ export class User {
   })
   name: string;
 
-  @Column('int', {
-    array: true,
-    nullable: false,
-    default: [],
-    name: 'pokemons',
-  })
   @OneToMany(() => UserPokemon, (userPokemon) => userPokemon.user)
   pokemons: UserPokemon[];
 }

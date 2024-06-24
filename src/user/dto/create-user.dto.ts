@@ -3,5 +3,4 @@ export class CreateUserDto {
   password: string;
   email: string;
   name: string;
-  pokemons: number[];
 }
