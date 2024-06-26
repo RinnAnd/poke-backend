@@ -66,7 +66,7 @@ export class PokemonService {
 
   async addAllPokemons() {
     const alreadeAdded = await this.pokemonRepository.find();
-    if (alreadeAdded.length > 0) {
+    if (alreadeAdded.length > 1000) {
       throw new HttpException(
         {
           status: HttpStatus.CONFLICT,

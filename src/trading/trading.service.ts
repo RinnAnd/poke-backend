@@ -59,7 +59,7 @@ export class TradingService {
 
   async getPokemonsForTrade() {
     return this.tradeRepository.find({
-      relations: ['userPokemon', 'userPokemon.pokemon'],
+      relations: ['userPokemon', 'userPokemon.pokemon', 'userPokemon.user'],
       where: { userPokemon: { forTrade: true } },
     });
   }
@@ -107,6 +107,20 @@ export class TradingService {
   async getTradeOffers() {
     return this.tradeOfferRepository.find({
       relations: ['offeredTradePokemon', 'targetTradePokemon'],
+    });
+  }
+
+  async getUserTradeOffers(userId: string) {
+    return this.tradeOfferRepository.find({
+      relations: [
+        'offeredTradePokemon',
+        'targetTradePokemon',
+        'offeredTradePokemon.userPokemon.pokemon',
+        'targetTradePokemon.userPokemon.pokemon',
+      ],
+      where: [
+        { targetTradePokemon: { userPokemon: { user: { id: userId } } } },
+      ],
     });
   }
 

@@ -25,6 +25,11 @@ export class TradingController {
     return this.tradingService.getTradeOffers();
   }
 
+  @Get('offers/:id')
+  getUserTradeOffers(@Param('id') id: string) {
+    return this.tradingService.getUserTradeOffers(id);
+  }
+
   @Post(':id/propose')
   proposeTrade(
     @Param('id') id: string,
