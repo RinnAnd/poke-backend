@@ -116,6 +116,7 @@ export class TradingService {
         'offeredTradePokemon',
         'targetTradePokemon',
         'offeredTradePokemon.userPokemon.pokemon',
+        'offeredTradePokemon.userPokemon.user',
         'targetTradePokemon.userPokemon.pokemon',
       ],
       where: [
