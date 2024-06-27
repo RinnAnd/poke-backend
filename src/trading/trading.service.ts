@@ -54,6 +54,9 @@ export class TradingService {
       );
     }
 
+    await this.tradeOfferRepository.delete({ targetTradePokemon: trade });
+    await this.tradeOfferRepository.delete({ offeredTradePokemon: trade });
+    await this.tradeRepository.delete(trade.id);
     await this.userPokemonRepository.update(userPokemonId, { forTrade: false });
   }
 
@@ -170,15 +173,13 @@ export class TradingService {
       this.removePokemonTrade(targetPokemonId);
       this.removePokemonTrade(offeredPokemonId);
 
-      await this.tradeOfferRepository.update(tradeId, { status: 'accepted' });
+      await this.tradeOfferRepository.update(tradeId, {
+        status: 'accepted',
+      });
 
       return {
         status: 200,
         message: 'Trade confirmed',
-        data: {
-          targetPokemonId,
-          offeredPokemonId,
-        },
       };
     } else {
       await this.tradeOfferRepository.update(tradeId, { status: 'rejected' });

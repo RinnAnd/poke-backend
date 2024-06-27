@@ -1,7 +1,6 @@
-import { Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 import { UserPokemon } from '../../user/entities/user-pokemon.entity';
-import { TradeOffer } from './trade-offer.entity';
 
 @Entity('trade-pokemon')
 export class TradePokemon {
@@ -11,6 +10,6 @@ export class TradePokemon {
   @ManyToOne(() => UserPokemon, (userPokemon) => userPokemon.id)
   userPokemon: UserPokemon;
 
-  @OneToMany(() => TradeOffer, (tradeOffer) => tradeOffer.id)
-  tradeOffers: TradeOffer[];
+  @Column({ default: false })
+  traded: boolean;
 }
